@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>hello</title>
+	<!-- to call css page & library in resources (library=nameof folder & name=name of file css) -->
+	<h:outputStylesheet library="css" name="stylesheet.css"/>
+	<!-- to call javascript page & library in resources (library=nameof folder & name=name of file js) -->
+	<h:outputScript library="javascript" name="index.js" />
+</h:head>
+<h:body>
+	<h:form>
+	
+	<!-- panelgrid do like <br> it enhance form & column"column number" border"border number"-->
+	<h:panelGrid columns="1" border="0">
+	
+	<!-- property which write in lable -->
+	<h:outputLabel value="name:"/>
+		<!--  write text & value is field-->
+		<!-- value={#nameofbean or write name of class.thefield in set ex:(setUsername) but frist character must write small -if the
+		all character of word  are capital we must write it capital
+		&validateLength refer to size
+		&requiredMessage is message which i want show to user-->
+	<h:inputText  id="n" value="#{user.name}" required="true" requiredMessage="دخل  قيمه  لو  سمحت"> 
+	<!--  <f:validateLength minimum="3" maximum="5"/>-->
+	</h:inputText>
+	<!-- if name>5 or <3 will show message error (for=id) -->
+	<!--  <h:message for="n"></h:message>-->
+	
+	
+	
+	
+	<!-- validateLongRange refer to range if it between or equal 3&100 -->
+		<h:outputLabel value="age:"/>
+	<h:inputText  id="a" value="#{user.age}"> 
+	<!-- <f:validateLongRange minimum="3" maximum="100"/>-->
+	</h:inputText>
+	<!--  <h:message for="a"></h:message>-->
+	
+	
+	
+	
+	
+	<!-- validateDoubleRange refer to range if it between or equal 3.2&15.0 -->
+		<h:outputLabel value="avg:"/>
+	
+	<h:inputText  id="v" value="#{user.avg}"> 
+	<!-- <f:validateDoubleRange minimum="3.2" maximum="15.0"/>-->
+	<!-- ajax dont load the page do refresh without any move & keyup means it write as the same time i write & if 
+	exist default num or string in field it doesnt write any thing when user write
+	if put event="click" and press click after write it will show
+	if put event="dbclick" and press doubleclick after write it will show
+	if put event="mousemove" and move mouse after write it will show-->
+	<f:ajax event="keyup" execute="v" render="avg" listener="#{user.event()}"/>
+	</h:inputText>
+	<h:outputText id="avg" value="#{user.avg}">
+			<!-- show frist two number only بعدالعلامه العشريه ان وجدت 
+	& minIntegerDigits frist numbers for integer number
+	&minFractionDigits show frist  numbers only بعدالعلامه العشريه ان وجدت ولو اقل من الرقم يقوم يزود  اصفار
+	type="percent"put %
+	type="currency" put $
+	currencysympole="any sign i want put"  -->
+	<f:convertNumber maxFractionDigits="2"/>
+	</h:outputText>
+	<!--  <h:message for="v"></h:message>-->
+	<!--  <h:commandButton value="Login">
+	 ajax dont load the page do refresh without any move 
+	<f:ajax execute="v" render="avg"/>
+	
+	</h:commandButton>
+	
+	-->
+	
+	
+	
+	<h:outputLabel value="password:"/>
+		<!--  write password -->
+	<h:inputSecret value="#{user.password}"/>
+	
+	
+	<h:outputLabel id="date" value="date:"/>
+		<!--  write password -->
+	<h:inputText value="#{user.date}">
+	<f:convertDateTime pattern="dd-mm-yyyy"/>
+	</h:inputText>
+	<h:outputText value="#{user.date}"/>
+	
+	
+	
+	<h:outputLabel value="message:"/>
+		<!--  write textarea -->
+	<h:inputTextarea value="#{user.message}" />
+	
+	
+	
+		<!--  field hidden -->
+	<h:inputHidden />
+	
+	
+	<h:selectBooleanCheckbox value="#{user.rememberme}"/>
+	<h:outputLabel value="rememberme"/>
+	
+	<h:outputLabel value="selectprogramminglanguage"/>
+	<h:selectManyCheckbox value="#{user.programinglanguages}">
+	<f:selectItem itemLabel="Java" itemValue="java"/>
+	<f:selectItem itemLabel="Php" itemValue="php"/>
+	<f:selectItem itemLabel="C#" itemValue="c#"/>
+	</h:selectManyCheckbox>
+	
+	<h:outputLabel value="selectyourgender"/>
+	<h:selectOneRadio value="#{user.gender}">
+	<f:selectItem  itemLabel="Female" itemValue="F"/>
+	<f:selectItem  itemLabel="Male" itemValue="M"/>
+	</h:selectOneRadio>
+	
+	<h:outputLabel value="selectyourcountry"/>
+	<h:selectOneListbox value="#{user.country}">
+	<f:selectItem itemLabel="Egypt" itemValue="E"/>
+	<f:selectItem itemLabel="Palastine" itemValue="p"/>
+	<f:selectItem itemLabel="Usa" itemValue="u"/>
+	</h:selectOneListbox>
+	
+	<h:outputLabel value="selectyourlanguage"/>
+	<h:selectManyListbox value="#{user.language}">
+	<f:selectItem itemLabel="Arabic" itemValue="Ar"/>
+	<f:selectItem itemLabel="English" itemValue="En"/>
+	</h:selectManyListbox>
+	
+	<h:outputLabel value="selectyourspecialization"/>
+	<h:selectOneMenu value="#{user.specialization}">
+	<f:selectItem itemLabel="SE" itemValue="se"/>
+	<f:selectItem itemLabel="CS" itemValue="cs"/>
+	</h:selectOneMenu>
+	
+	<!-- to put image i will create folder resourcses then folder image then put image
+	library see the resourses or <h:graphicImage url="image/Lighthouse.jpg"/>  -->
+	<h:graphicImage library="image" name="jsf-mini-logo.png"/> 
+	
+	<!-- click on button go to class.method and do the code (showmessage in java script)-->
+	<h:commandButton value="Login" onclick="showMessage()" type="submit" action="#{user.insert()}"/>
+	
+
+		<!-- show value
+		 value={#nameofbean or write name of class.thefield in set ex:(getUsername) but frist character must write small -if the
+		all character of word  are capital we must write it capital -->
+		
+		
+	<h:outputLabel value="UserDetail:"/>
+	<h:outputText value="#{user.name}"/> 
+	<h:outputText value="#{user.age}"/>
+	<h:outputText value="#{user.date}"/>
+	<h:outputText value="#{user.gender}"/>
+	<h:outputText value="#{user.country}"/>
+	
+	
+	
+	
+	
+	<!-- show method 
+	<h:commandLink value="go" action="#{user.insert()}"/>-->
+	<!-- show another page but name of page dont show in url 
+	 <h:commandLink value="go" action="Student"/>
+	  show another page & name of page show in url -->
+	 <h:commandLink value="go" action="Student?faces-redirect=true" onclick="showMessage"/>
+	 
+	 
+	 <!--  i can do only one message for all field -->
+	 <!-- faced do field in header or footer &<f:facet name="footer"> -->
+	 <f:facet name="header">
+	 <h:messages/>
+	 </f:facet>
+	 </h:panelGrid>
+	 
+	 
+	 <!-- do table & var="any word it like id" -->
+	 <h:dataTable value="#{user.stu}" var="s">
+	 <h:column>
+	 <f:facet name="header">ID</f:facet>
+	 <!-- #s.id include array of id -->
+	 #{s.id}
+	 </h:column>
+	  <h:column>
+	 <f:facet name="header">Name</f:facet>
+	 <!-- #s.username include array of username -->
+	 #{s.username}
+	 </h:column>
+	 </h:dataTable>
+	 
+	 
+	</h:form>
+</h:body>
+
+</html>
